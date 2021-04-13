@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+      <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Auto Text Formatter</title>
+            <style>
+                  .container {
+                        margin-left: 10px;
+                        margin-right: 10px;
+                  }
+                  .input:focus {
+                        transition: .2s linear all;
+                        outline: none;
+                        box-shadow: 1px 1px 4px 4px rgb(66, 148, 255,0.5);
+                        border-width: 1px;
+                        border-color: rgba(18, 121, 255, 0.5); 
+                  }
+
+                  .input {
+                        transition: .2s linear all;
+                        height: 95vh;
+                        width: 100%;
+                        border-radius: 10px;
+                        border-color: gray;
+                        border-width: 1px;
+                  }
+
+                  .btn {
+                        display: inline-block;
+                        background-color: rgb(72, 72, 235);
+                        color: white;
+                        font-family: arial, sans-serif;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        height: fit-content;
+                        width: fit-content;
+                        font-size: 14px;
+                        border-style: solid;
+                        border-width: 1px;
+                        border-color: rgb(55, 55, 230);
+                        margin-left: 0px;
+                        margin-right: 0px;
+                  }
+
+                  .btn:hover,
+                  .btn:focus {
+                        outline: none;
+                        background-color: rgb(94, 94, 240);
+                  }
+
+                  .btn:focus {
+                        transition: .2s linear all;
+                        box-shadow: 0.5px 0.5px 2px 2px rgba(113, 174, 255, 0.5);
+                  }
+
+                  .btnGroup {
+                        display: flex;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                  }
+                  .btnGroup .btn:first-child {
+                        border-top-left-radius: 10px !important;
+                        border-bottom-left-radius: 10px !important;
+                  }
+
+                  .btnGroup .btn:last-child {
+                        border-top-right-radius: 10px !important;
+                        border-bottom-right-radius: 10px !important;
+                  }
+
+                  .options-row {
+                        width: 100%;
+                        height: 50px;
+                  }
+
+            </style>
+      </head>
+      <body>
+            <div class="container">
+                  <div class="options-row">
+                        <div class="btnGroup">
+                              <input title="Copy Text" class="copyBtn btn" type="button" value="copy">
+                              <input title="Paste Text" class="pasteBtn btn" type="button" value="paste">
+                              <input title="Clear Textbox" class="clearBtn btn" type="button" value="clear">
+                        </div>
+                  </div>
+                  <textarea class="input" rows="10" placeholder="type here"></textarea>
+            </div>
+            <script>
+                  function copyEmail() {
+                        let input = document.querySelector(".input");
+                        input.select();
+                        document.execCommand("copy");
+                        alert("Text Sucessfully Copied!");
+                  }
+
+                  function clearAll() {
+                        let input = document.querySelector(".input");
+                        input.value = "";
+                  }
+
+                  function paste() {
+                        var pasteText = document.querySelector(".input");
+                        pasteText.focus();
+                        document.execCommand("paste");
+                        alert("Text Sucessfully Pasted!");
+                  }
+
+                  const BTN = document.querySelector(".copyBtn");
+                  const clearBtn = document.querySelector(".clearBtn");
+                  const pasteBtn = document.querySelector(".pasteBtn");
+                  BTN.addEventListener("click",copyEmail,false);
+                  clearBtn.addEventListener("click", clearAll, false);
+                  pasteBtn.addEventListener("click", paste, false);
+            </script>
+      </body>
+</html>
