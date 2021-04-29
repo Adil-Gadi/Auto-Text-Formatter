@@ -6,9 +6,15 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <title>Auto Text Formatter</title>
             <style>
+                  body {
+                        margin-top: 0px;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                  }
                   .container {
-                        margin-left: 10px;
-                        margin-right: 10px;
+                        margin-left: 20px;
+                        margin-right: 20px;
+                        margin-top: 0px;
                   }
                   .input:focus {
                         transition: .2s linear all;
@@ -63,31 +69,54 @@
                         margin-bottom: 10px;
                   }
                   .btnGroup .btn:first-child {
+                        margin-left: 10px;
                         border-top-left-radius: 10px !important;
                         border-bottom-left-radius: 10px !important;
                   }
 
                   .btnGroup .btn:last-child {
+                        margin-right: 10px;
                         border-top-right-radius: 10px !important;
                         border-bottom-right-radius: 10px !important;
                   }
 
                   .options-row {
                         width: 100%;
-                        height: 50px;
+                        height: fit-content;
+                        position: fixed;
+                        background-color: white;
+                        /* border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px; */
+                        box-shadow: 1px 1px 4px 4px rgba(87, 87, 87, 0.5);
+                        padding-bottom: 10px;
+                        padding-top: 10px;
                   }
 
+                  .cap {
+                        position: static;
+                        width: 100%;
+                        height: 120px;
+                  }
+
+                  .title {
+                        margin-bottom: 5px;
+                        margin-top: 5px;
+                        margin-left: 10px;
+                        margin-right: 5px;
+                  }
             </style>
       </head>
       <body>
-            <div class="container">
-                  <div class="options-row">
-                        <div class="btnGroup">
-                              <input title="Copy Text" class="copyBtn btn" type="button" value="copy">
-                              <input title="Paste Text" class="pasteBtn btn" type="button" value="paste">
-                              <input title="Clear Textbox" class="clearBtn btn" type="button" value="clear">
-                        </div>
+            <div class="options-row">
+                  <h1 class="title">Auto Text Formatter</h1>
+                  <div class="btnGroup">
+                        <input title="Copy Text" class="copyBtn btn" type="button" value="copy">
+                        <input title="Paste Text" class="pasteBtn btn" type="button" value="paste">
+                        <input title="Clear Textbox" class="clearBtn btn" type="button" value="clear">
                   </div>
+            </div>
+            <div class="container">
+                  <div class="cap"></div>
                   <textarea class="input" rows="10" placeholder="type here"></textarea>
             </div>
             <script>
@@ -105,7 +134,8 @@
 
                   function paste() {
                         var pasteText = document.querySelector(".input");
-                        pasteText.focus();
+                        pasText.value = "";
+                        pasteText.select();
                         document.execCommand("paste");
                         alert("Text Sucessfully Pasted!");
                   }
