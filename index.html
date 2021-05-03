@@ -67,6 +67,7 @@
                         display: flex;
                         margin-top: 10px;
                         margin-bottom: 10px;
+                        margin-right: 20px;
                   }
                   .btnGroup .btn:first-child {
                         margin-left: 10px;
@@ -103,16 +104,38 @@
                         margin-top: 5px;
                         margin-left: 10px;
                         margin-right: 5px;
+                        font-family: Arial, Helvetica, sans-serif;
+                  }
+
+                  .row {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        width: fit-content;
+                        height: fit-content;
+                        align-items: center;
+                  }
+
+                  .item {
+                        font-size: 18px;
+                        margin-right: 10px;
+                        font-family: Arial, Helvetica, sans-serif;
                   }
             </style>
       </head>
       <body>
             <div class="options-row">
                   <h1 class="title">Auto Text Formatter</h1>
-                  <div class="btnGroup">
-                        <input title="Copy Text" class="copyBtn btn" type="button" value="copy">
-                        <input title="Paste Text" class="pasteBtn btn" type="button" value="paste">
-                        <input title="Clear Textbox" class="clearBtn btn" type="button" value="clear">
+                  <div class="row">
+                        <div class="btnGroup">
+                              <input title="Copy Text" class="copyBtn btn" type="button" value="copy">
+                              <input title="Paste Text" class="pasteBtn btn" type="button" value="paste">
+                              <input title="Clear Textbox" class="clearBtn btn" type="button" value="clear">
+                        </div>
+                        <div class="char row">
+                              <div id="word" class="item">Words: 0</div>
+                              <div id="characters" class="item">Characters: 0</div>
+                        </div>
                   </div>
             </div>
             <div class="container">
@@ -120,6 +143,9 @@
                   <textarea class="input" rows="10" placeholder="type here"></textarea>
             </div>
             <script>
+                  const textBox = document.querySelector(".input");
+                  const char = document.querySelector("#characters");
+                  const word = document.querySelector("#word");
                   function copyEmail() {
                         let input = document.querySelector(".input");
                         input.select();
@@ -140,12 +166,28 @@
                         alert("Text Sucessfully Pasted!");
                   }
 
+                  function updateChar() {
+                        char.innerHTML = `Characters: ${textBox.value.length}`;
+                  }
+
+                  function updateWord() {
+                        let optimize = textBox.value.split(" ");
+                        if (optimize.length == 1 && optimize[0] == "") {
+                              word.innerHTML = "Words: 0"
+                        } else {
+                              word.innerHTML = `Words: ${optimize.length}`;
+                        }
+                  }
+                  updateChar();
+
                   const BTN = document.querySelector(".copyBtn");
                   const clearBtn = document.querySelector(".clearBtn");
                   const pasteBtn = document.querySelector(".pasteBtn");
                   BTN.addEventListener("click",copyEmail,false);
                   clearBtn.addEventListener("click", clearAll, false);
                   pasteBtn.addEventListener("click", paste, false);
+                  textBox.addEventListener("keyup", updateChar, false);
+                  textBox.addEventListener("keyup", updateWord, false);
             </script>
       </body>
 </html>
